@@ -1,19 +1,25 @@
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         DataProvider provider = new DataProvider();
         DataHandler dataHandler = new DataHandler();
 
-        String productsName = dataHandler.handleData(provider.getProductNames());
-        getOutPut("Products: " + productsName);
-
-        String salesAmount = dataHandler.handleData(provider.getSalesAmounts());
-        getOutPut("Sales, EUR: " + salesAmount);
+        researchProcessing("Products: ", dataHandler, provider.getProductNames());
+        researchProcessing("Sales, EUR: ", dataHandler, provider.getSalesAmounts());
     }
 
-    private static void getOutPut(String output){
+    private static void getOutPut(String output) {
         System.out.println(output);
     }
 
+    private static <T> void researchProcessing(String title, DataHandler dataHandler, T[] data) {
+        try {
+            System.out.print(title);
+            String result = dataHandler.handleData(data);
+            getOutPut(result);
+        } catch (IllegalArgumentException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
