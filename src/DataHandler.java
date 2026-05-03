@@ -10,6 +10,7 @@ public class DataHandler {
             count++;
             sb.append(String.format("(%d) %s; ", count, item));
         }
+        sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
     }
 }
